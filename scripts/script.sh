@@ -123,9 +123,9 @@ instantiateChaincode () {
 	# while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
 	# lets supply it directly as we know it using the "-o" option
 	if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
-		peer chaincode instantiate -o orderer0.example.com:7050 -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":[""]}' -P "OR	('Org1MSP.member','Org2MSP.member')" >&log.txt
+		peer chaincode instantiate -o orderer2.example.com:7050 -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":[""]}' -P "OR	('Org1MSP.member','Org2MSP.member')" >&log.txt
 	else
-		peer chaincode instantiate -o orderer0.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":[""]}' -P "OR	('Org1MSP.member','Org2MSP.member')" >&log.txt
+		peer chaincode instantiate -o orderer2.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 1.0 -c '{"Args":[""]}' -P "OR	('Org1MSP.member','Org2MSP.member')" >&log.txt
 	fi
 	res=$?
 	cat log.txt
@@ -154,6 +154,8 @@ do
 	installChaincode $id
 done
 
+#echo "Sleep for 80 secs ..."
+#sleep 80
 #Instantiate chaincode on Peer2/Org2
 printf "Instantiating chaincode on org2/peer2...\n"
 instantiateChaincode 0
@@ -163,7 +165,7 @@ cd /opt/gopath/src/github.com/hyperledger/fabric/examples/ccchecker
 printf "sleep for 10 seconds ...\n"
 sleep 10
 printf "\n\n======Pre-process execution time $(($(date +%s)-START_TIME)) secs==========\n\n"
-printf "\n--- Starting 'Chaincode Checker' tool \n\n"
+printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
 CCCHECKER_EXEC_TIME=$(date +%s)
 ./ccchecker -c ccchecker.json -e env.json
 

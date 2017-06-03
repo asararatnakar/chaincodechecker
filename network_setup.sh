@@ -9,6 +9,7 @@ CLI_TIMEOUT="$3"
 COMPOSE_FILE=docker-compose.yaml
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 
+export CUR_DIR=${PWD##*/}
 function printHelp () {
 	echo "Usage: ./network_setup <up|down> <\$channel-name> <\$cli_timeout> <couchdb>.\nThe arguments must be in order."
 }
@@ -58,7 +59,8 @@ function networkUp () {
 }
 
 function networkDown () {
-    docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -p e2ecli down
+
+    docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -p $CUR_DIR down
 
     #Cleanup the chaincode containers
     clearContainers
