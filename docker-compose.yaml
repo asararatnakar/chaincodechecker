@@ -8,7 +8,7 @@ version: '2'
 services:
 
   zookeeper0:
-    container_name: zookeeper0    
+    container_name: zookeeper0
     extends:
       file: base.yaml
       service: zookeeper
@@ -223,7 +223,7 @@ services:
 
   cli:
     container_name: cli
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-tools
     tty: true
     environment:
       - GOPATH=/opt/gopath
