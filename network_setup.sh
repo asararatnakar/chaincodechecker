@@ -9,6 +9,11 @@ CLI_TIMEOUT="$3"
 COMPOSE_FILE=docker-compose.yaml
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 
+##TODO: For now hardcoding these values
+: ${TOTAL_CC:="2"}
+: ${TOTAL_CHANNELS:="2"}
+export TOTAL_CC
+export TOTAL_CHANNELS
 export CUR_DIR=${PWD##*/}
 function printHelp () {
 	echo "Usage: ./network_setup <up|down> <\$channel-name> <\$cli_timeout> <couchdb>.\nThe arguments must be in order."
@@ -47,7 +52,7 @@ function removeUnwantedImages() {
 function networkUp () {
     #Generate all the artifacts that includes org certs, orderer genesis block,
     # channel configuration transaction
-    source generateArtifacts.sh $CH_NAME
+    source generateArtifacts.sh $CH_NAME $TOTAL_CHANNELS
 
     TLS_ENABLED=$TLS CHANNEL_NAME=$CH_NAME TIMEOUT=$CLI_TIMEOUT docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH up -d 2>&1
 

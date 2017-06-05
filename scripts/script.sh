@@ -11,8 +11,14 @@ echo " \____\____|          \____|_| |_|_____\____|_|\_\_____|_| \_\\"
 echo
 
 CHANNEL_NAME="$1"
+TOTAL_CHANNELS="$2"
+TOTAL_CC="$3"
+
 : ${CHANNEL_NAME:="mychannel"}
 : ${TIMEOUT:="60"}
+: ${TOTAL_CHANNELS:="2"}
+: ${TOTAL_CC:="2"}
+
 COUNTER=1
 MAX_RETRY=5
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/cacerts/ca.example.com-cert.pem
@@ -111,14 +117,11 @@ updateAnchorPeers() {
 installChaincode () {
 	PEER=$1
 	setGlobals $PEER
-	#for (( i=0; i<2; i=$i+1 )) ##Num of chaincodes
-	#do
-		peer chaincode install -n mycc$2 -v 1.0 -p github.com/hyperledger/fabric/examples/ccchecker/chaincodes/newkeyperinvoke >&log.txt
-		res=$?
-		cat log.txt
-    verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
-		printf "===================== Installed cc 'mycc$2' on remote peer PEER$PEER ===================== \n"
-	#done
+	peer chaincode install -n mycc$2 -v 1.0 -p github.com/hyperledger/fabric/examples/ccchecker/chaincodes/newkeyperinvoke >&log.txt
+	res=$?
+	cat log.txt
+  verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
+	printf "===================== Installed cc 'mycc$2' on remote peer PEER$PEER ===================== \n"
 }
 
 instantiateChaincode () {
@@ -126,7 +129,7 @@ instantiateChaincode () {
 	setGlobals $PEER
 	# while 'peer chaincode' command can get the orderer endpoint from the peer (if join was successful),
 	# lets supply it directly as we know it using the "-o" option
-	for (( cc=0; cc<2; cc=$cc+1 )) ## Num of chincodes
+	for (( cc=0; cc<$TOTAL_CC; cc=$cc+1 )) ## Num of chincodes
 	do
 		if [ -z "$CORE_PEER_TLS_ENABLED" -o "$CORE_PEER_TLS_ENABLED" = "false" ]; then
 			peer chaincode instantiate -o orderer2.example.com:7050 -C $CHANNEL_NAME$2 -n mycc$cc -v 1.0 -c '{"Args":[""]}' -P "OR	('Org1MSP.member','Org2MSP.member')" >&log.txt
@@ -140,7 +143,7 @@ instantiateChaincode () {
 	done
 }
 
-for (( cc=0; cc<2; cc=$cc+1 )) ## Num of chincodes
+for (( cc=0; cc<$TOTAL_CC; cc=$cc+1 )) ## Num of chincodes
 do
 	## Install chaincode on all peers (org1/org2)
 	printf "Installing chaincode 'mycc$cc' on all peers...\n"
@@ -150,7 +153,7 @@ do
 	done
 done
 
-for (( iter=0; iter<2; iter=$iter+1 ))
+for (( iter=0; iter<$TOTAL_CHANNELS; iter=$iter+1 ))
 do
 	## Create channel
 	printf "Creating channel..."
@@ -170,7 +173,7 @@ do
 	#sleep 80
 done
 #Instantiate chaincode on Peer2/Org2
-printf "Instantiating chaincode on org2/peer2...\n"
+printf "Instantiating chaincode on on each Organization\n"
 instantiateChaincode 0 0
 instantiateChaincode 2 1
 

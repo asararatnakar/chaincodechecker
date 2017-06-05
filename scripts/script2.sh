@@ -22,7 +22,8 @@ CORE_PEER_ADDRESS=peer0.org2.example.com:7051
 cp /etc/hyperledger/fabric/*.yaml /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/
 cd /opt/gopath/src/github.com/hyperledger/fabric/examples/ccchecker
 printf "sleep for 75 seconds ...\n"
-sleep 75
+sleep 75 ## FIXME: This looks ugly
+
 printf "\n\n======Pre-process execution time $(($(date +%s)-START_TIME)) secs==========\n\n"
 printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
 CCCHECKER_EXEC_TIME=$(date +%s)

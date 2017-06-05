@@ -9,7 +9,9 @@
 #set -e
 
 CHANNEL_NAME=$1
+TOTAL_CHANNELS=$2
 : ${CHANNEL_NAME:="mychannel"}
+: ${TOTAL_CHANNELS:="2"}
 echo $CHANNEL_NAME
 
 #TODO: Change the whole logic to generate binaries for each run
@@ -57,7 +59,7 @@ function generateChannelArtifacts() {
 	# named orderer.genesis.block or the orderer will fail to launch!
 	$CONFIGTXGEN -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
 
-	for (( i=0; i<2; i=$i+1 ))
+	for (( i=0; i<$TOTAL_CHANNELS; i=$i+1 ))
 	do
 		echo
 		echo "#################################################################"
