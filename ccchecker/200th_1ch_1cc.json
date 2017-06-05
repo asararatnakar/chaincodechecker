@@ -1,0 +1,20 @@
+{"ChaincodeClients":
+  [
+       {"Name": "mycc",
+	"InitArgs":[""],
+        "Path": "github.com/hyperledger/fabric/examples/ccchecker/chaincodes/newkeyperinvoke",
+	"NumFinalQueryAttempts": 10,
+	"DelayBetweenInvokeMs": 1,
+	"DelayBetweenQueryMs": 10,
+	"Lang": "GOLANG",
+	"TimeoutToAbortRunSecs": 1920,
+	"TimeoutToAbortVerifySecs": 1920,
+	"WaitAfterInvokeMs": 1720000,
+	"NumberOfInvokes": 200,
+	"Concurrency": 200
+       }
+   ],
+"TimeoutToAbortRunSecs": 1920,
+"TimeoutToAbortVerifySecs": 1920,
+ "ChainName": "mychannel"
+}

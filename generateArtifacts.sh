@@ -57,26 +57,28 @@ function generateChannelArtifacts() {
 	# named orderer.genesis.block or the orderer will fail to launch!
 	$CONFIGTXGEN -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
 
-	echo
-	echo "#################################################################"
-	echo "### Generating channel configuration transaction 'channel.tx' ###"
-	echo "#################################################################"
-	$CONFIGTXGEN -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/$CHANNEL_NAME.tx -channelID $CHANNEL_NAME
+	for (( i=0; i<2; i=$i+1 ))
+	do
+		echo
+		echo "#################################################################"
+		echo "### Generating channel configuration transaction 'channel.tx' ###"
+		echo "#################################################################"
+		$CONFIGTXGEN -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/$CHANNEL_NAME$i.tx -channelID $CHANNEL_NAME$i
 
-	echo
-	echo "#################################################################"
-	echo "#######    Generating anchor peer update for Org1MSP   ##########"
-	echo "#################################################################"
-	$CONFIGTXGEN -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+		echo
+		echo "#################################################################"
+		echo "#######    Generating anchor peer update for Org1MSP   ##########"
+		echo "#################################################################"
+		$CONFIGTXGEN -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors$i.tx -channelID $CHANNEL_NAME$i -asOrg Org1MSP
 
-	echo
-	echo "#################################################################"
-	echo "#######    Generating anchor peer update for Org2MSP   ##########"
-	echo "#################################################################"
-	$CONFIGTXGEN -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
-	echo
+		echo
+		echo "#################################################################"
+		echo "#######    Generating anchor peer update for Org2MSP   ##########"
+		echo "#################################################################"
+		$CONFIGTXGEN -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors$i.tx -channelID $CHANNEL_NAME$i -asOrg Org2MSP
+		echo
+	done
 }
 
 generateCerts
 generateChannelArtifacts
-

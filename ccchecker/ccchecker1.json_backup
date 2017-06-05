@@ -7,11 +7,11 @@
 	"DelayBetweenInvokeMs": 1,
 	"DelayBetweenQueryMs": 10,
 	"Lang": "GOLANG",
-	"TimeoutToAbortRunSecs": 240,
-	"TimeoutToAbortVerifySecs": 240,
-	"WaitAfterInvokeMs": 240000,
-	"NumberOfInvokes": 25,
-	"Concurrency": 25
+	"TimeoutToAbortRunSecs": 60,
+	"TimeoutToAbortVerifySecs": 60,
+	"WaitAfterInvokeMs": 10000,
+	"NumberOfInvokes": 10,
+	"Concurrency": 10
 },
 {"Name": "mycc1",
 "InitArgs":[""],
@@ -20,14 +20,14 @@
 "DelayBetweenInvokeMs": 1,
 "DelayBetweenQueryMs": 10,
 "Lang": "GOLANG",
-"TimeoutToAbortRunSecs": 240,
-"TimeoutToAbortVerifySecs": 240,
-"WaitAfterInvokeMs": 240000,
-"NumberOfInvokes": 25,
-"Concurrency": 25
+"TimeoutToAbortRunSecs": 60,
+"TimeoutToAbortVerifySecs": 60,
+"WaitAfterInvokeMs": 10000,
+"NumberOfInvokes": 10,
+"Concurrency": 10
 }
    ],
-"TimeoutToAbortRunSecs": 500,
-"TimeoutToAbortVerifySecs": 500,
+"TimeoutToAbortRunSecs": 120,
+"TimeoutToAbortVerifySecs": 120,
  "ChainName": "mychannel0"
 }

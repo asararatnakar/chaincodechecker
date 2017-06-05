@@ -1,0 +1,6 @@
+{
+   "Orderer": "orderer1.example.com:7050",
+   "ConfigDir": "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/",
+   "MSPDir": "/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/",
+   "MSPID": "Org2MSP"
+}

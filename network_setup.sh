@@ -52,10 +52,10 @@ function networkUp () {
     TLS_ENABLED=$TLS CHANNEL_NAME=$CH_NAME TIMEOUT=$CLI_TIMEOUT docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH up -d 2>&1
 
     if [ $? -ne 0 ]; then
-	echo "ERROR !!!! Unable to pull the images "
-	exit 1
+			echo "ERROR !!!! Unable to pull the images "
+			exit 1
     fi
-    docker logs -f cli
+    docker logs -f org1.cli
 }
 
 function networkDown () {
