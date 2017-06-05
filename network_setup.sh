@@ -8,6 +8,7 @@ CLI_TIMEOUT="$3"
 : ${TLS:=false}
 COMPOSE_FILE=docker-compose.yaml
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
+: ${CH_NAME:="mychannel"}
 
 ##TODO: For now hardcoding these values
 : ${TOTAL_CC:="2"}
@@ -21,9 +22,9 @@ function printHelp () {
 
 function validateArgs () {
 	if [ -z "${UP_DOWN}" ]; then
-		echo "Option up / down / restart not mentioned"
-		printHelp
-		exit 1
+		UP_DOWN="restart"
+		echo "----- Setting the default option RESTART ------"
+		return
 	fi
 	if [ -z "${CH_NAME}" ]; then
 		echo "setting to default channel 'mychannel'"

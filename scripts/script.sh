@@ -179,8 +179,8 @@ instantiateChaincode 2 1
 
 cp /etc/hyperledger/fabric/*.yaml /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/
 cd /opt/gopath/src/github.com/hyperledger/fabric/examples/ccchecker
-printf "sleep for 20 seconds ...\n"
-sleep 20
+printf "sleep for 10 seconds ...\n"
+sleep 10
 printf "\n\n======Pre-process execution time $(($(date +%s)-START_TIME)) secs==========\n\n"
 printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
 CCCHECKER_EXEC_TIME=$(date +%s)
