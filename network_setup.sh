@@ -21,24 +21,24 @@ function printHelp () {
 }
 
 function validateArgs () {
+	if [ -z "${CH_NAME}" ]; then
+		echo "setting to default channel 'mychannel'"
+		CH_NAME=mychannel
+	fi
 	if [ -z "${UP_DOWN}" ]; then
 		UP_DOWN="restart"
 		echo "----- Setting the default option RESTART ------"
 		return
 	fi
-	if [ -z "${CH_NAME}" ]; then
-		echo "setting to default channel 'mychannel'"
-		CH_NAME=mychannel
-	fi
 }
 
 function clearContainers () {
-        CONTAINER_IDS=$(docker ps -aq)
-        if [ -z "$CONTAINER_IDS" -o "$CONTAINER_IDS" = " " ]; then
-                echo "---- No containers available for deletion ----"
-        else
-                docker rm -f $CONTAINER_IDS
-        fi
+	CONTAINERS=$(docker ps -a|wc -l)
+	if [ "$CONTAINERS" -gt "1" ]; then
+		docker rm -f $(docker ps -aq)
+	else
+		echo "---- No containers available for deletion ----"
+	fi
 }
 
 function removeUnwantedImages() {
@@ -54,21 +54,25 @@ function networkUp () {
     #Generate all the artifacts that includes org certs, orderer genesis block,
     # channel configuration transaction
     source generateArtifacts.sh $CH_NAME $TOTAL_CHANNELS
-
+    #docker-compose -f $COMPOSE_FILE up -d zookeeper0 zookeeper1 zookeeper2
+    #sleep 5
     TLS_ENABLED=$TLS CHANNEL_NAME=$CH_NAME TIMEOUT=$CLI_TIMEOUT docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH up -d 2>&1
 
     if [ $? -ne 0 ]; then
-			echo "ERROR !!!! Unable to pull the images "
-			exit 1
+	echo "ERROR !!!! Unable to pull the images "
+	exit 1
     fi
     docker logs -f org1.cli
 }
 
 function networkDown () {
+    ## Make sure we capture all the logs before shutting down the network
+    source getContainerLogs.sh
 
+    #shutdown the network
     docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -p $CUR_DIR down
 
-    #Cleanup the chaincode containers
+    #Cleanup the docker containers
     clearContainers
 
     #Cleanup images
