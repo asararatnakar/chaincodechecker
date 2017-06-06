@@ -13,7 +13,10 @@ function getLogs(){
 	docker logs peer1.org1.example.com &> peer1.org1.example.com.txt
 	docker logs peer0.org2.example.com &> peer0.org2.example.com.txt
 	docker logs peer1.org2.example.com &> peer1.org2.example.com.txt
-	docker logs org1.cli &> org1.cli.txt
+	docker logs org1.cli &> peer0.org1.cli.txt
+	docker logs org2.cli &> peer0.org2.cli.txt
+	docker logs peer2.cli &> peer1.org1.cli.txt
+	docker logs peer4.cli &> peer1.org2.cli.txt
         DATE=`date +%Y_%m_%d_%H_%M_%S`	
 	tar czf $DATE-logs.tar.gz *.txt
 	rm -rf *.txt
