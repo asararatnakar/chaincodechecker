@@ -21,7 +21,7 @@ TOTAL_CC="$3"
 
 COUNTER=1
 MAX_RETRY=5
-ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/cacerts/ca.example.com-cert.pem
+ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer0.example.com/msp/cacerts/ca.example.com-cert.pem
 
 echo "Channel name : "$CHANNEL_NAME
 
@@ -179,19 +179,18 @@ instantiateChaincode 2 1
 
 cp /etc/hyperledger/fabric/*.yaml /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/
 cd /opt/gopath/src/github.com/hyperledger/fabric/examples/ccchecker
-printf "sleep for 10 seconds ...\n"
-sleep 10
 printf "\n\n======Pre-process execution time $(($(date +%s)-START_TIME)) secs==========\n\n"
-printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
-CCCHECKER_EXEC_TIME=$(date +%s)
-./ccchecker -c ccchecker1.json -e env1.json
+printf "\n\nReady to execute the ccchecker\n\n"
+#printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
+#CCCHECKER_EXEC_TIME=$(date +%s)
+#./ccchecker -c ccchecker1.json -e env1.json
 
-printf "\n\n====== ccchecker execution time $(($(date +%s)-CCCHECKER_EXEC_TIME)) secs==========\n\n"
-echo "  ____ ___  __  __ ____  _     _____ _____ _____ ____  "
-echo " / ___/ _ \|  \/  |  _ \| |   | ____|_   _| ____|  _ \\ "
-echo "| |  | | | | |\/| | |_) | |   |  _|   | | |  _| | | | |"
-echo "| |__| |_| | |  | |  __/| |___| |___  | | | |___| |_| |"
-echo " \____\___/|_|  |_|_|   |_____|_____| |_| |_____|____/ "
-printf "\n\n"
+#printf "\n\n====== ccchecker execution time $(($(date +%s)-CCCHECKER_EXEC_TIME)) secs==========\n\n"
+#echo "  ____ ___  __  __ ____  _     _____ _____ _____ ____  "
+#echo " / ___/ _ \|  \/  |  _ \| |   | ____|_   _| ____|  _ \\ "
+#echo "| |  | | | | |\/| | |_) | |   |  _|   | | |  _| | | | |"
+#echo "| |__| |_| | |  | |  __/| |___| |___  | | | |___| |_| |"
+#echo " \____\___/|_|  |_|_|   |_____|_____| |_| |_____|____/ "
+#printf "\n\n"
 
 exit 0

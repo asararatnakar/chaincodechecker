@@ -2,3 +2,4 @@ channel-artifacts/*.tx
 channel-artifacts/*.block
 crypto-config
 scripts/log.txt
+*tar.gz

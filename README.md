@@ -46,4 +46,17 @@ Outpiut would be some thing similar:
 Test complete
 ```
 
-__NOTE__:  Fabric commit level used at the time of uploading the changes __670be92475a50b06e7bcb3fca15a558438d88e4a__
+__NOTE__:  Fabric commit level used at the time of uploading the changes __0fd5f67d67afd654d156d423fafb2c85d381c2ab__
+
+
+### execute cccheker on each cli container
+
+```
+docker exec -it org1.cli /bin/bash -c "./scripts/common.sh org1"
+
+docker exec -it org2.cli /bin/bash -c "./scripts/common.sh org2"
+
+docker exec -it peer2.cli /bin/bash -c "./scripts/common.sh org1"
+
+docker exec -it peer4.cli /bin/bash -c "./scripts/common.sh org2"
+```
