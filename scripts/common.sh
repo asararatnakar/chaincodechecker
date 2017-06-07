@@ -12,23 +12,19 @@ ENV="$3"
 
 if test "$ORG" = "org1"
 then
-  : ${CONFIG:="ccchecker1.json"}
-  : ${ENV:="env1.json"}
+  : ${CONFIG:="testdata/ccchecker1.json"}
+  : ${ENV:="testdata/env1.json"}
   echo "----------- This is ORG1 ----------- "
 elif test "$ORG" = "org2"
 then
-  : ${CONFIG:="ccchecker2.json"}
-  : ${ENV:="env2.json"}
-  echo "----------- This is ORG2 ----------- "
+  : ${CONFIG:="testdata/ccchecker2.json"}
+  : ${ENV:="testdata/env2.json"}
 fi
+printf "\n -------- Using following configurations --------\n"
+echo "$CONFIG"
+echo "$ENV"
+printf "\n ------------------------------------------------\n"
 ./ccchecker -c $CONFIG -e $ENV
-#printf "sleep for 80 seconds ...\n"
-#sleep 80 ## FIXME: This looks ugly
-
-#printf "\n\n======Pre-process execution time $(($(date +%s)-START_TIME)) secs==========\n\n"
-#printf "\n ----- Starting 'Chaincode Checker' tool ----- \n\n"
-#CCCHECKER_EXEC_TIME=$(date +%s)
-#./ccchecker -c ccchecker2.json -e env2.json
 
 printf "\n\n====== ccchecker execution time $(($(date +%s)-$START_TIME)) secs==========\n\n"
 echo "  ____ ___  __  __ ____  _     _____ _____ _____ ____  "

@@ -1,0 +1,34 @@
+{
+	"ChaincodeClients": [{
+			"Name": "mycc0",
+			"InitArgs": [""],
+			"Path": "github.com/hyperledger/fabric/examples/ccchecker/chaincodes/newkeyperinvoke",
+			"NumFinalQueryAttempts": 10,
+			"DelayBetweenInvokeMs": 1,
+			"DelayBetweenQueryMs": 1,
+			"Lang": "GOLANG",
+			"TimeoutToAbortRunSecs": 2000,
+			"TimeoutToAbortVerifySecs": 2000,
+			"WaitAfterInvokeMs": 6020000,
+			"NumberOfInvokes": 100,
+			"Concurrency": 100
+		},
+		{
+			"Name": "mycc1",
+			"InitArgs": [""],
+			"Path": "github.com/hyperledger/fabric/examples/ccchecker/chaincodes/newkeyperinvoke",
+			"NumFinalQueryAttempts": 10,
+			"DelayBetweenInvokeMs": 1,
+			"DelayBetweenQueryMs": 1,
+			"Lang": "GOLANG",
+			"TimeoutToAbortRunSecs": 2000,
+			"TimeoutToAbortVerifySecs": 2000,
+			"WaitAfterInvokeMs": 6020000,
+			"NumberOfInvokes": 100,
+			"Concurrency": 100
+		}
+	],
+	"TimeoutToAbortRunSecs": 2000,
+	"TimeoutToAbortVerifySecs": 2000,
+	"ChainName": "mychannel1"
+}

@@ -62,7 +62,7 @@ function networkUp () {
 	echo "ERROR !!!! Unable to pull the images "
 	exit 1
     fi
-    docker logs -f org1.cli
+    docker logs -f peer0.org1.cli
 }
 
 function networkDown () {

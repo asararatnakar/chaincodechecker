@@ -20,18 +20,18 @@ function getLogs(){
 	do
 		docker logs zookeeper$i >& zookeeper$i.txt
 		docker logs kafka$i >& kafka$i.txt
-		docker logs orderer$i.example.com >& orderer$i.example.com.txt
+		docker logs orderer$i.example.com >& orderer$i.txt
 		docker logs couchdb$i &> couchdb$i.txt
 	done
 	docker logs couchdb3 &> couchdb3.txt
-	docker logs peer0.org1.example.com &> peer0.org1.example.com.txt
-	docker logs peer1.org1.example.com &> peer1.org1.example.com.txt
-	docker logs peer0.org2.example.com &> peer0.org2.example.com.txt
-	docker logs peer1.org2.example.com &> peer1.org2.example.com.txt
-	docker logs org1.cli &> peer0.org1.cli.txt
-	docker logs org2.cli &> peer0.org2.cli.txt
-	docker logs peer2.cli &> peer1.org1.cli.txt
-	docker logs peer4.cli &> peer1.org2.cli.txt
+	docker logs peer0.org1.example.com &> peer0_org1.txt
+	docker logs peer1.org1.example.com &> peer1_org1.txt
+	docker logs peer0.org2.example.com &> peer0_org2.txt
+	docker logs peer1.org2.example.com &> peer1_org2.txt
+	docker logs peer0.org1.cli &> peer0_org1_cli.txt
+	docker logs peer0.org2.cli &> peer0_org2_cli.txt
+	docker logs peer1.org1.cli &> peer1_org1_cli.txt
+	docker logs peer1.org2.cli &> peer1_org2_cli.txt
 
 	## tar the logs
 	tar czf $TAR_FILE *.txt
